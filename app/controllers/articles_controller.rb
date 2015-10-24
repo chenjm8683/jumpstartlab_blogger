@@ -17,7 +17,9 @@ class ArticlesController < ApplicationController
         #@article = Article.new(
         #    title = params[:article][:title]
         #    body = params[:article][:body])
-        @article = Article.new(article_params) 
+        # @article = Article.new(ArticlesHelper.article_params)    #update to helpers won't reload
+        @article = Article.new(params.require(:article).permit(:title, :body, :tag_list, :image))
+
         @article.save
         flash.notice = "Article '#{@article.title}' Created!"
         redirect_to article_path(@article)
@@ -42,7 +44,8 @@ class ArticlesController < ApplicationController
     
     def update
         @article = Article.find(params[:id])
-        @article.update(article_params)
+        #@article.update(article_params)  #update to helpers cannot be reloaded
+        @article.update(params.require(:article).permit(:title, :body, :tag_list, :image))
         flash.notice = "Article '#{@article.title}' Updated!"
         
         redirect_to article_path(@article)

@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # A library that manages file attachments and uploading
 gem 'paperclip'
+# For authentication
+gem 'sorcery'
 
 
 
